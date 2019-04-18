@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="FacetManager">
+    <facet __external-system-id="Maven" type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet __external-system-id="Maven" type="Spring" name="Spring">
+      <configuration />
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Library Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/library-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/library-servlet.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

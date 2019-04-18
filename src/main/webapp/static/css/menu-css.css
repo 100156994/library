@@ -1,0 +1,121 @@
+@charset "utf-8";
+.myBody
+{
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 15px;
+    -webkit-box-shadow: 3px 3px 10px #dddddd;
+    box-shadow: 0px 3px 15px 2px #dddddd;
+}
+.myTitle
+{
+    width: 100%;
+}
+/* 导航栏 */
+.myNav
+{
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    text-align: right;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius:5px;
+    background-color: #0033ff;
+}
+.myLi
+{
+    background-color: #0033ff;
+    width: 200px;
+    border-right: 1px solid #fff;
+    font-family: Arial;
+}
+.mvNav a {
+    text-decoration: none;
+}
+.myNav a:hover
+{
+
+    border-radius:0px;
+    background-color: #ff6600;
+}
+/* 设置ul和li的样式 */
+.myNav ul , .myNav li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+/* 设置二级菜单绝对定位，并隐藏 */
+.myNav > ul > li > ul , .dropdown-menu2 {
+    position: absolute;
+    display: none;
+    -webkit-box-shadow: 3px 3px 10px #dddddd;
+    box-shadow: 0px 3px 10px 2px lightgrey;
+}
+
+/* 设置二级菜单的li的样式 */
+.myNav > ul > li > ul > li , .dropdown-menu2 {
+    float: none;
+}
+/* 鼠标放在一级菜单上，显示二级菜单 */
+.myNav > ul > li:hover ul {
+    display: block;
+}
+/* 一级菜单 */
+.myNav > ul > li > a {
+    width: 200px;
+    line-height: 40px;
+    color: #fff;
+    text-align: center;
+    border-left: 1px solid #bbf;
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+
+}
+
+/* 在一级菜单中，第一个不设置左边框 */
+.myNav > ul > li:first-child > a {
+    border-left: none;
+}
+
+/* 二级菜单 */
+.dropdown-menu > li > a , .dropdown-menu2 {
+    width: 200px;
+    line-height: 36px;
+    color: #000;
+    background-color: #fafafa;
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+
+}
+.dropdown-menu {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    -moz-border-radius: 10px;
+
+}
+/* 在二级菜单中，第一个设置顶边框 */
+.dropdown-menu > li:first-child > a, .dropdown-menu2 {
+    border-top: 1px solid #ccc;
+}
+.dropdown-menu > li:last-child > a {
+    border-bottom: 0px;
+}
+/* 在二级菜单中，鼠标放上去的样式 */
+.dropdown-menu > li > a:hover {
+    color: #000;
+    background-color: #ccc;
+}
+.Main{
+    width: 100%;
+}
