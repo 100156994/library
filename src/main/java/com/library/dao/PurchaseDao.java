@@ -26,9 +26,7 @@ public class PurchaseDao {
     private final static String EDIT_PURCHASE_SQL="update purchase set isbn=?,num=?,unitprice=?,time=?,buyer=?,status=? where pur_id= ? ";
     private final static String QUERY_ALL_PURCHASES_SQL="SELECT * FROM purchase ";
     private final static String QUERY_PURCHASE_SQL="SELECT * FROM purchase WHERE pur_id like  ?  or isbn like ?";
-    //查询匹配图书的个数
     private final static String MATCH_PURCHASE_SQL="SELECT count(*) FROM purchase WHERE pur_id like ?  or isbn like ?  ";
-    //根据书号查询图书
     private final static String GET_PURCHASE_SQL="SELECT * FROM purchase where pur_id = ? ";
 
 
