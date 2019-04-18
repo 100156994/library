@@ -2,11 +2,13 @@ package com.library.dao;
 
 import com.library.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class UserDao {
     }
 
     private final static String QUERY_ALL_USERS_SQL="SELECT * FROM users ";
-
+    private final static String DELETE_USER_SQL="delete from users where user_id = ?  ";
     public ArrayList<User> getAllUsers(){
         final ArrayList<User> users=new ArrayList<>();
 
@@ -45,5 +47,26 @@ public class UserDao {
             }
         });
         return users;
+    }
+
+
+    public int deleteUser(String userId) {
+        return jdbcTemplate.update(DELETE_USER_SQL, userId);
+
+    }
+
+    public int[] deleteUser(final ArrayList<String> userIds){
+        BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, userIds.get(i));
+            }
+
+            public int getBatchSize() {
+                return userIds.size();
+            }
+
+        };
+        return jdbcTemplate.batchUpdate(DELETE_USER_SQL,setter);
     }
 }

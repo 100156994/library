@@ -31,9 +31,7 @@ public class EmployeeController {
     @ResponseBody
     public JSONObject allEmployees(){
         JSONObject object = new JSONObject();
-        List<Map<String,String>> list = new ArrayList<Map<String,String>>();
         ArrayList<Employee> employees=employeeService.getAllEmployees();
-        // String nvrsjson = JSONArray.toJSONString(books);
         object.put("Rows",employees);
         object.put("Total",employees.size());
         return object;

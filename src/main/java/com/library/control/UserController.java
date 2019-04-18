@@ -30,9 +30,7 @@ public class UserController {
     @ResponseBody
     public JSONObject allUsers(){
         JSONObject object = new JSONObject();
-        List<Map<String,String>> list = new ArrayList<Map<String,String>>();
         ArrayList<User> users=userService.getAllUsers();
-        // String nvrsjson = JSONArray.toJSONString(books);
         object.put("Rows",users);
         object.put("Total",users.size());
         return object;

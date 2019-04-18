@@ -15,6 +15,9 @@ import com.alibaba.fastjson.JSONArray;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 public class PurchaseController {
 
@@ -26,23 +29,20 @@ public class PurchaseController {
         this.purchaseService = purchaseService;
     }
 
-    @RequestMapping("/querypurchase.html")
-    public ModelAndView queryPurchaseDo(HttpServletRequest request, String searchWord){
-        boolean exist=purchaseService.matchPurchase(searchWord);
-        if (exist){
-            ArrayList<Purchase> purchases = purchaseService.querypurchase(searchWord);
-            ModelAndView modelAndView = new ModelAndView("admin_purchases");
-            modelAndView.addObject("purchases",purchases);
-            return modelAndView;
-        }
-        else{
-            return new ModelAndView("admin_purchases","error","没有匹配的采购记录");
-        }
+    @RequestMapping("/allpurs")
+    @ResponseBody
+    public JSONObject allPurchases(){
+        JSONObject object = new JSONObject();
+        ArrayList<Purchase> purchases=purchaseService.getAllpurchases();
+        // String nvrsjson = JSONArray.toJSONString(books);
+        object.put("Rows",purchases);
+        object.put("Total",purchases.size());
+        return object;
     }
 
     @ResponseBody
-    //, method = RequestMethod.POST
-    @RequestMapping(value = "/test1")
+
+    @RequestMapping(value = "/test1", method = RequestMethod.POST)
     public JSONObject insert(@RequestBody Purchase purchase) {
         JSONObject object = new JSONObject();
         System.out.println(purchase.toString());
@@ -56,8 +56,7 @@ public class PurchaseController {
     }
 
     @ResponseBody
-    //, method = RequestMethod.POST
-    @RequestMapping(value = "/test")
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     public JSONObject test(@RequestBody User user) {
         JSONObject object = new JSONObject();
         System.out.println(user.toString());

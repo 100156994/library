@@ -51,6 +51,10 @@ public class BookService {
         return bookDao.deleteBook(bookId);
     }
 
+    public int[] deleteBook(ArrayList<String> bookIds){
+        return bookDao.deleteBook(bookIds);
+    }
+
     public boolean matchBook(String searchWord){
         return bookDao.matchBook(searchWord)>0;
     }

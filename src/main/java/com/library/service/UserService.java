@@ -20,4 +20,13 @@ public class UserService {
     public ArrayList<User> getAllUsers(){
             return userDao.getAllUsers();
     }
+
+
+    public int deleteUser(String userId){
+        return userDao.deleteUser(userId);
+    }
+
+    public int[] deleteUser(ArrayList<String> userIds){
+        return userDao.deleteUser(userIds);
+    }
 }

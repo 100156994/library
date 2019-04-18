@@ -2,11 +2,13 @@ package com.library.dao;
 
 import com.library.pojo.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -88,7 +90,20 @@ public class PurchaseDao {
 
         return jdbcTemplate.update(DELETE_PURCHASE_SQL,purId);
     }
+    public int[] deletePurchase(final ArrayList<String> purIds){
+        BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
 
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, purIds.get(i));
+            }
+
+            public int getBatchSize() {
+                return purIds.size();
+            }
+
+        };
+        return jdbcTemplate.batchUpdate(DELETE_PURCHASE_SQL,setter);
+    }
 
     public int addPurchase(Purchase purchase){
 

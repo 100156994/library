@@ -29,6 +29,10 @@ public class PurchaseService {
         return purchaseDao.deletePurchase(purchaseId);
     }
 
+    public int[] deletePurchase(ArrayList<String> purchaseIds){
+        return purchaseDao.deletePurchase(purchaseIds);
+    }
+
     public boolean matchPurchase(String searchWord){
         return purchaseDao.matchPurchase(searchWord)>0;
     }
@@ -41,6 +45,7 @@ public class PurchaseService {
         Purchase purchase=purchaseDao.getPurchase(purchaseId);
         return purchase;
     }
+
     public boolean editpurchase(Purchase purchase){
         return purchaseDao.editPurchase(purchase)>0;
     }

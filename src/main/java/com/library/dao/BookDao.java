@@ -2,11 +2,13 @@ package com.library.dao;
 
 import com.library.pojo.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -109,6 +111,21 @@ public class BookDao {
     public int deleteBook(String bookId){
 
         return jdbcTemplate.update(DELETE_BOOK_SQL,bookId);
+    }
+
+    public int[] deleteBook(final ArrayList<String> bookIds){
+        BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, bookIds.get(i));
+            }
+
+            public int getBatchSize() {
+                return bookIds.size();
+            }
+
+        };
+        return jdbcTemplate.batchUpdate(DELETE_BOOK_SQL,setter);
     }
 
     public int addBook(Book book){

@@ -20,4 +20,13 @@ public class EmployeeService {
     public ArrayList<Employee> getAllEmployees(){
         return employeeDao.getAllEmployees();
     }
+
+    public int deleteEmployee(String empId){
+        return employeeDao.deleteEmployee(empId);
+    }
+
+    public int[] deleteEmployee(ArrayList<String> empIds){
+        return employeeDao.deleteEmployee(empIds);
+    }
+
 }
