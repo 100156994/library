@@ -125,7 +125,7 @@ public class BookController {
 
         int succ = this.bookService.deleteBook(book.getBookId());
         //处理每一个book的更新情况 todo
-
+        System.out.println(succ);
         if(succ==1){
             object.put("succ",succ);
             object.put("message","数据删除成功！");
@@ -149,8 +149,7 @@ public class BookController {
         }
         int[] succ = this.bookService.deleteBook(bookIds);
         //处理每一个book的更新情况 todo
-
-        if(succ[1]==1){
+        if(succ[0]==1){
             object.put("succ",succ);
             object.put("message","数据删除成功！");
         }else{

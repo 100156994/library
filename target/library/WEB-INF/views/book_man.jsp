@@ -147,18 +147,23 @@
     function deleteRow()
     {
         var row=grid.getSelectedRows();
+
+        var clone = function (obj) {
+            return JSON.parse(JSON.stringify(obj));
+        };
+        var post =clone(row);
         for(var i=0;i<row.length;i++){
-            delete row[i].__id;
-            delete row[i].__previd;
-            delete row[i].__index;
-            delete row[i].__status;
-            delete row[i].__nextid;
-            delete row[i]._editing;
+            delete post[i].__id;
+            delete post[i].__previd;
+            delete post[i].__index;
+            delete post[i].__status;
+            delete post[i].__nextid;
+            delete post[i]._editing;
         }
         $.ajax({
             url: 'http://localhost:8080/deletebooks',
             type: 'POST',
-            data: JSON.stringify(row),
+            data: JSON.stringify(post),
             contentType: 'application/json',
             dataType: "json",
             success: function (result) {
