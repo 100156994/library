@@ -43,6 +43,12 @@ public class BookController {
         return modelAndView;
     }
 
+    @RequestMapping("/book_man.html")
+    public ModelAndView bookMan(){
+        ModelAndView modelAndView=new ModelAndView("book_man");
+        return modelAndView;
+    }
+
     @RequestMapping("/allbooks")
     @ResponseBody
     public JSONObject allBooks(){
@@ -79,9 +85,74 @@ public class BookController {
         return object;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/editbook", method = RequestMethod.POST)
+    public JSONObject editBook(@RequestBody Book book) {
+        JSONObject object = new JSONObject();
+        System.out.println(book.toString());
+        boolean succ = this.bookService.editBook(book);
+        if(succ){
+            object.put("message","数据更新成功！");
+        }else{
+            object.put("message","数据更新失败！");
+        }
+        return object;
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/editbooks", method = RequestMethod.POST)
+    public JSONObject editBooks(@RequestBody List<Book> books) {
+        JSONObject object = new JSONObject();
+        int[] succ = this.bookService.editBooks(books);
+        //处理每一个book的更新情况 todo
 
+        if(succ[1]==1){
+            object.put("succ",succ);
+            object.put("message","数据插入成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","数据插入失败！");
+        }
+        return object;
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
+    public JSONObject deleteBook(@RequestBody Book book) {
+        JSONObject object = new JSONObject();
 
+        int succ = this.bookService.deleteBook(book.getBookId());
+        //处理每一个book的更新情况 todo
+
+        if(succ==1){
+            object.put("succ",succ);
+            object.put("message","数据删除成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","数据删除失败！");
+        }
+        return object;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deletebooks", method = RequestMethod.POST)
+    public JSONObject deleteBooks(@RequestBody List<Book> books) {
+        JSONObject object = new JSONObject();
+        ArrayList<String> bookIds =new ArrayList<String>();
+        for(int i=0;i<books.size();i++){
+            bookIds.add(books.get(i).getBookId());
+        }
+        int[] succ = this.bookService.deleteBook(bookIds);
+        //处理每一个book的更新情况 todo
+
+        if(succ[1]==1){
+            object.put("succ",succ);
+            object.put("message","数据删除成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","数据删除失败！");
+        }
+        return object;
+    }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class BookService {
@@ -69,6 +70,10 @@ public class BookService {
     }
     public boolean editBook(Book book){
         return bookDao.editBook(book)>0;
+    }
+
+    public int[] editBooks(List<Book> books){
+        return bookDao.editBooks(books);
     }
 
 }

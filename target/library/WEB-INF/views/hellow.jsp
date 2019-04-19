@@ -33,7 +33,7 @@
         function upd() {
             $.ajax({
                 type: "get",
-                url: "http://localhost:8080/allbookjson",
+                url: "http://localhost:8080/allbooks",
                 success: function(result) {
                     console.log(result);
                     data=result;

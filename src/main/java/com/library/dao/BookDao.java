@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class BookDao {
@@ -200,5 +201,19 @@ public class BookDao {
         return jdbcTemplate.update(EDIT_BOOK_SQL,new Object[]{isbn,classnum,name,author,translator,editionnum,pubdate,publish,pages,price,keyword,volumeid,volumename,entrytime,state,collection,bookId});
     }
 
+    public int[] editBooks(final List<Book> books){
+        BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setObject(1, books.get(i));
+            }
+
+            public int getBatchSize() {
+                return books.size();
+            }
+
+        };
+        return jdbcTemplate.batchUpdate(EDIT_BOOK_SQL,setter);
+    }
 
 }

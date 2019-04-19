@@ -30,6 +30,15 @@
             alert("error");
         }
     });
+    alert(JSON.stringify({
+        "purId": "12",
+        "isbn": "121",
+        "num": 2,
+        "unitprice": 15.2,
+        "time": new Date(),
+        "buyer": "asd",
+        "status":1
+    }));
     $.ajax({
         url: 'http://localhost:8080/test1',
         type: 'POST',
