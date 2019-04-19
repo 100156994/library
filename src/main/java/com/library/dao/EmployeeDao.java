@@ -27,7 +27,9 @@ public class EmployeeDao {
 
     private final static String QUERY_ALL_EMPLOYEES_SQL="SELECT * FROM employee ";
     private final static String DELETE_EMPLOYEE_SQL="delete from employee where emp_id = ?  ";
-    private final static String EDIT_BOOK_SQL="update employee set emp_name=?,emp_phone=?,emp_email=?,emp_balance=?,emp_lastestlogin=? where emp_id= ? ;";
+    private final static String EDIT_EMP_SQL="update employee set emp_name=?,emp_phone=?,emp_email=?,emp_balance=?,emp_lastestlogin=? where emp_id= ? ;";
+    private final static String ADD_EMP_SQL="insert into employee values (?,?,?,?,?,?,?)";
+
     public ArrayList<Employee> getAllEmployees(){
         final ArrayList<Employee> employees=new ArrayList<Employee>();
 
@@ -90,8 +92,37 @@ public class EmployeeDao {
             }
 
         };
-        return jdbcTemplate.batchUpdate(EDIT_BOOK_SQL,setter);
+        return jdbcTemplate.batchUpdate(EDIT_EMP_SQL,setter);
     }
+
+    public int[] addEmployee(final List<Employee> employees){
+        BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                Employee employee = employees.get(i);
+
+                java.sql.Date  lastlogin =new java.sql.Date(employee.getLastestlogin().getTime());
+                ps.setString(1,employee.getEmp_id());
+                ps.setString(2,employee.getPassword());
+                ps.setString(3,employee.getName());
+                ps.setString(4,employee.getPhone());
+                ps.setString(5,employee.getEmail());
+                ps.setFloat(6,employee.getBalance());
+                ps.setDate(7,lastlogin);
+
+
+            }
+
+            public int getBatchSize() {
+                return employees.size();
+            }
+
+        };
+        return jdbcTemplate.batchUpdate(ADD_EMP_SQL,setter);
+
+
+    }
+
 
 }
 
