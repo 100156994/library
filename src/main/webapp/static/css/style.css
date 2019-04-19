@@ -37,5 +37,19 @@
 }
 .btnList{
 	width: 100%;
-	margin-left: 1%;
+	float:right;
+}
+#maingrid5{
+	float: left;
+	margin-top: 30%;
+	margin-left: 60px;
+}
+.personal{
+	float:left;
+	margin-top: 5%;
+	margin-left: 30%;
+	font-size: 20px;
+}
+.perinf{
+	margin: auto;
 }
