@@ -78,11 +78,10 @@ public class EmployeeDao {
             java.sql.Date lastDate =new java.sql.Date(employee.getLastestlogin().getTime());
             ps.setString(1,employee.getName());
             ps.setString(2,employee.getPhone());
-            ps.setString(3,employee.getName());
-            ps.setString(4,employee.getEmail());
-            ps.setFloat(5,employee.getBalance());
-            ps.setDate(6,lastDate);
-            ps.setString(7,employee.getEmp_id());
+            ps.setString(3,employee.getEmail());
+            ps.setFloat(4,employee.getBalance());
+            ps.setDate(5,lastDate);
+            ps.setString(6,employee.getEmp_id());
 
         }
 

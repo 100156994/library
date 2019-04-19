@@ -83,7 +83,6 @@ public class EmployeeController {
     @RequestMapping(value = "/editemps", method = RequestMethod.POST)
     public JSONObject editEmps(@RequestBody List<Employee> emps) {
         JSONObject object = new JSONObject();
-        //每一个待删除的图书影响的数据库条目 1为成功
         int[] succ = this.employeeService.editEmployee(emps);
         boolean flag=true;
         for(int i=0;i<emps.size();i++){
