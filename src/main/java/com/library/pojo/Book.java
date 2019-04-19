@@ -1,5 +1,7 @@
 package com.library.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class Book implements Serializable{
     private String author;
     private String translator;
     private String editionnum;
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date pubdate;
     private String publish;
     private int pages;
@@ -19,6 +22,7 @@ public class Book implements Serializable{
     private String keyword;
     private String volumeid;
     private String volumename;
+    @JsonDeserialize(using = DateDeserializer.class)
     private Date entrytime;
     private int state;
     private int collection;

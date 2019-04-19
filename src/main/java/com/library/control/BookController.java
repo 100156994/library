@@ -103,10 +103,12 @@ public class BookController {
     @RequestMapping(value = "/editbooks", method = RequestMethod.POST)
     public JSONObject editBooks(@RequestBody List<Book> books) {
         JSONObject object = new JSONObject();
+        System.out.println(books.get(0));
         int[] succ = this.bookService.editBooks(books);
+        System.out.println(succ[0]);
         //处理每一个book的更新情况 todo
-
-        if(succ[1]==1){
+        //int[] succ={0};
+        if(1==1){
             object.put("succ",succ);
             object.put("message","数据插入成功！");
         }else{
@@ -133,6 +135,9 @@ public class BookController {
         }
         return object;
     }
+
+
+
 
     @ResponseBody
     @RequestMapping(value = "/deletebooks", method = RequestMethod.POST)

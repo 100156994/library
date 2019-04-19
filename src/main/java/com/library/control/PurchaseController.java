@@ -54,6 +54,19 @@ public class PurchaseController {
         }
         return object;
     }
+    @ResponseBody
+    @RequestMapping(value = "/test2", method = RequestMethod.POST)
+    public JSONObject insert(@RequestBody List<Purchase> purchases) {
+        JSONObject object = new JSONObject();
+        System.out.println(purchases.get(0).toString());
+        //boolean succ = this.purchaseService.addPurchase(purchases);
+        if(true){
+            object.put("message","数据插入成功！");
+        }else{
+            object.put("message","数据插入失败！");
+        }
+        return object;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.POST)

@@ -27,7 +27,9 @@ public class BookDao {
 
     private final static String ADD_BOOK_SQL="INSERT INTO book VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final static String DELETE_BOOK_SQL="delete from book where book_id = ?  ";
-    private final static String EDIT_BOOK_SQL="update book set isbn=?,classnum=?,name=?,author=?,translator=?,editionnum=?,pubdate=?,publish=?,pages=?,price=?,keyword=?,volumeid=?,volumename=?,entrytime=?,state=?,collection=? where book_id= ? ;";
+    private final static String EDIT_BOOK_SQL="update book set isbn=?,book_classnum=?,book_name=?,book_author=?,book_translator=?" +
+            ",book_editionnum=?,book_publicdate=?,book_publisher=?,book_pages=?,book_price=?,book_keyword=?,book_volumeid=?,book_volumename=?," +
+            "book_entrytime=?,book_status=?,book_collection=? where book_id= ? ;";
     private final static String QUERY_ALL_BOOKS_SQL="SELECT * FROM book ";
     private final static String QUERY_BOOK_SQL="SELECT * FROM book WHERE book_id like  ?  or name like ?   ";
     //查询匹配图书的个数
@@ -205,7 +207,30 @@ public class BookDao {
         BatchPreparedStatementSetter setter= new BatchPreparedStatementSetter(){
 
             public void setValues(PreparedStatement ps, int i) throws SQLException {
-                ps.setObject(1, books.get(i));
+                Book book = books.get(i);
+
+
+                Date pubdate=book.getPubdate();
+                java.sql.Date sDate =new java.sql.Date(pubdate.getTime());
+                java.sql.Date esDate =new java.sql.Date(book.getEntrytime().getTime());
+                ps.setString(1,book.getIsbn());
+                ps.setString(2,book.getClassnum());
+                ps.setString(3,book.getName());
+                ps.setString(4,book.getAuthor());
+                ps.setString(5,book.getTranslator());
+                ps.setString(6,book.getEditionnum());
+                ps.setDate(7,sDate);
+                ps.setString(8,book.getPublish());
+                ps.setInt(9,book.getPages());
+                ps.setFloat(10,book.getPrice());
+                ps.setString(11,book.getKeyword());
+                ps.setString(12,book.getVolumeid());
+                ps.setString(13,book.getVolumename());
+                ps.setDate(14,esDate);
+                ps.setInt(15,book.getState());
+                ps.setInt(16,book.getCollection());
+                ps.setString(17,book.getBookId());
+
             }
 
             public int getBatchSize() {

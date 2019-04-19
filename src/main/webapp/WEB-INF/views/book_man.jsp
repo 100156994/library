@@ -102,38 +102,43 @@
     function endEdit()
     {
         var row = grid.getSelectedRows();
+
+        var clone = function (obj) {
+            return JSON.parse(JSON.stringify(obj));
+        };
+        var post =clone(row);
+        grid.endEdit();
         if (!row) { alert('请选择行'); return; }
-        for(var i=0;i<row.length;i++){
-            delete row[i].__id;
-            delete row[i].__previd;
-            delete row[i].__index;
-            delete row[i].__status;
-            delete row[i].__nextid;
-            delete row[i]._editing;
+
+        for(var i=0;i<clone.length;i++){
+            delete clone[i].__id;
+            delete clone[i].__previd;
+            delete clone[i].__index;
+            delete clone[i].__status;
+            delete clone[i].__nextid;
+            delete clone[i]._editing;
+
         }
+
         alert(JSON.stringify(row));
+        console.log(JSON.stringify(row));
         $.ajax({
             url: 'http://localhost:8080/editbooks',
             type: 'POST',
-            data: JSON.stringify(row),
+            data: JSON.stringify(post),
             contentType: 'application/json',
             dataType: "json",
             success: function (result) {
-                for(var i=0;i<row.length;i++){
-                    grid.endEdit(row);
-                }
+
                 alert(result.message);
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
             error: function (err) {
                 alert("error");
+                location.reload();
             }
         });
-        for(var i=0;i<row.length;i++){
-            grid.endEdit(row);
-        }
-
     }
     function endAllEdit()
     {
