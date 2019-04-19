@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 @Service
 public class EmployeeService {
 
@@ -29,4 +31,8 @@ public class EmployeeService {
         return employeeDao.deleteEmployee(empIds);
     }
 
+
+    public  int[] editEmployee(List<Employee> employees){
+        return  employeeDao.editEmployee(employees);
+    }
 }

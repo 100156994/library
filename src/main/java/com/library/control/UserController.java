@@ -36,5 +36,30 @@ public class UserController {
         return object;
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/deleteusers", method = RequestMethod.POST)
+    public JSONObject deleteUsers(@RequestBody List<User> users) {
+        JSONObject object = new JSONObject();
+        ArrayList<String> userIds =new ArrayList<>();
+        for(int i=0;i<users.size();i++){
+            userIds.add(users.get(i).getUser_id());
+        }
+        //每一个待删除的图书影响的数据库条目 1为成功
+        int[] succ = this.userService.deleteUser(userIds);
+        boolean flag=true;
+        for(int i=0;i<userIds.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
+            object.put("succ",succ);
+            object.put("message","读者删除成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","读者删除失败！");
+        }
+        return object;
+    }
 }

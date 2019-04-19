@@ -38,4 +38,69 @@ public class EmployeeController {
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/deleteemps", method = RequestMethod.POST)
+    public JSONObject deleteEmps(@RequestBody List<Employee> emps) {
+        JSONObject object = new JSONObject();
+        ArrayList<String> empIds =new ArrayList<>();
+        for(int i=0;i<emps.size();i++){
+            empIds.add(emps.get(i).getEmp_id());
+        }
+        //每一个待删除的图书影响的数据库条目 1为成功
+        int[] succ = this.employeeService.deleteEmployee(empIds);
+        boolean flag=true;
+        for(int i=0;i<empIds.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
+            object.put("succ",succ);
+            object.put("message","员工删除成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","员工删除失败！");
+        }
+        return object;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addemp", method = RequestMethod.POST)
+    public  JSONObject addEmp(@RequestBody Employee emp){
+        JSONObject object = new JSONObject();
+        int succ =employeeService.deleteEmployee(emp.getEmp_id());
+        if(succ==1){
+            object.put("message","员工添加成功！");
+        }else{
+            object.put("message","员工删除失败！");
+        }
+        return object;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/editemps", method = RequestMethod.POST)
+    public JSONObject editEmps(@RequestBody List<Employee> emps) {
+        JSONObject object = new JSONObject();
+        //每一个待删除的图书影响的数据库条目 1为成功
+        int[] succ = this.employeeService.editEmployee(emps);
+        boolean flag=true;
+        for(int i=0;i<emps.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
+            object.put("succ",succ);
+            object.put("message","员工删除成功！");
+        }else{
+            object.put("succ",succ);
+            object.put("message","员工删除失败！");
+        }
+        return object;
+    }
+
+
 }

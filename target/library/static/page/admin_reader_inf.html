@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理员系统</title>
+</head>
+<body>
+<title></title>    
+    <meta name="keywords" content="免费控件,免费UI控件,免费开源UI,免费开源UI控件,免费开源UI框架,可编辑表格,datagrid,editgrid,固定列,多表头"> 
+    <link href="../LigerUI/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="../CSS/menu-css.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+    <script src="../LigerUI/Source/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="../LigerUI/Source/lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+    <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerTextBox.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+        <script src="../LigerUI/Source/lib/ligerUI/js/plugins/ligerSpinner.js" type="text/javascript"></script>
+    <script src="../JS/EmployeeData.js" type="text/javascript"></script>
+        <script src="../JS/t.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    var grid = null;
+    $(function () {
+        window['g'] =grid =  $("#maingrid4").ligerGrid({
+            checkbox: true,
+            columns: [
+                { display: '读者号', name: 'user_id', align: 'left', width: 140 },
+                { display: '姓名', name: 'name',width: 140,editor: { type: 'text' }},
+                { display: '余额', name: 'balance',width:100, minWidth: 70 ,editor: { type: 'text' }},
+                { display: '可借阅册数', name: 'borrow', width: 80, editor: { type: 'text' } },
+                { display: '已借阅册数', name: 'borrowed', width: 80, editor: { type: 'text' } },
+                { display: '可预约册数', name: 'order',width:80 ,editor: { type: 'text' }},
+                { display: '已预约册数', name: 'ordered',width:80,editor: { type: 'text' }}
+            ],  pageSize:10,where : f_getWhere(),
+
+            onSelectRow: function (rowdata, rowindex)
+            {
+                $("#txtrowindex").val(rowindex);
+            },
+            enabledEdit: true, clickToEdit: false, isScroll: false,
+            isChecked: f_isChecked, onCheckRow: f_onCheckRow, onCheckAllRow: f_onCheckAllRow,
+            dataAction:"local",
+            dataType: "json",
+            url:"http://localhost:8080/allbooks",
+            width: '80%',height:'100%'
+        });
+
+
+        $("#pageloading").hide();
+    });
+    function f_onCheckAllRow(checked)
+    {
+        for (var rowid in this.records)
+        {
+            if(checked)
+                addCheckedCustomer(this.records[rowid]['emp_id']);
+            else
+                removeCheckedCustomer(this.records[rowid]['emp_id']);
+        }
+    }
+    function f_search()
+    {
+        //grid.options.data = $.extend(true, {}, EmployeeData);
+        grid.loadData(f_getWhere());
+    }
+    function f_getWhere()
+    {
+        if (!grid) return null;
+        var clause = function (rowdata, rowindex)
+        {
+            var key = $("#txtKey").val();
+            return rowdata.name.indexOf(key) > -1;
+        };
+        return clause;
+    }
+    function deleteRow()
+    {
+        var row=grid.getSelectedRows();
+
+        var clone = function (obj) {
+            return JSON.parse(JSON.stringify(obj));
+        };
+        var post =clone(row);
+        for(var i=0;i<row.length;i++){
+            delete post[i].__id;
+            delete post[i].__previd;
+            delete post[i].__index;
+            delete post[i].__status;
+            delete post[i].__nextid;
+            delete post[i]._editing;
+        }
+        $.ajax({
+            url: 'http://localhost:8080/deletebooks',
+            type: 'POST',
+            data: JSON.stringify(post),
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (result) {
+                grid.deleteSelectedRow();
+                alert(result.message);
+                //$("#myModal").modal("hide");
+                //oTable.fnDraw();
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+    function getSelected()
+    {
+        var row = grid.getSelectedRow();
+        if (!row) { alert('请选择行'); return; }
+        alert(JSON.stringify(row));
+    }
+    function getData()
+    {
+        var data = grid.getData();
+        alert(JSON.stringify(data));
+    }
+    var checkedCustomer = [];
+    function findCheckedCustomer(bookId)
+    {
+        for(var i =0;i<checkedCustomer.length;i++)
+        {
+            if(checkedCustomer[i] == bookId) return i;
+        }
+        return -1;
+    }
+    function addCheckedCustomer(bookId)
+    {
+        if(findCheckedCustomer(ISBN) == -1)
+            checkedCustomer.push(bookId);
+    }
+    function removeCheckedCustomer(bookId)
+    {
+        var i = findCheckedCustomer(bookId);
+        if(i==-1) return;
+        checkedCustomer.splice(i,1);
+    }
+    function f_isChecked(rowdate)
+    {
+        if (findCheckedCustomer(rowdate) == -1)
+            return false;
+        return true;
+    }
+    function f_onCheckRow(checked, data)
+    {
+        if (checked) addCheckedCustomer(data.name);
+        else removeCheckedCustomer(data.name);
+    }
+    function f_getChecked()
+    {
+        alert(checkedCustomer.join(','));
+    }
+</script>
+<!-- 标题 -->
+<div class="myTitle">
+    <img src="../IMG/title.png">
+</div>
+<!-- 导航 -->
+<div class="myNav"style="position:  relative;z-index: 1">
+    <ul class="nav nav-pills nav-justified">
+        <li class="dropdown myLi" >
+            <a href="" class="dropdown-toggle"
+               data-toggle="dropdown">图书管理<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="admin_book_inf.html">信息管理</a></li>
+                <li class="divider"></li>
+                <li><a href="admin_in.html">入库管理</a></li>
+                <li class="divider"></li>
+                <li><a href="admin_out.html">出库管理</a></li>
+                <li class="divider"></li>
+                <li class="divider"></li>
+                <li><a href="admin_buy.html">采购管理</a></li>
+
+            </ul>
+        </li>
+        <li class="dropdown myLi" >
+            <a href="" class="dropdown-toggle"
+               data-toggle="dropdown">员工管理<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="admin_emp_inf.html">信息管理</a></li>
+                <li class="divider"></li>
+                <li><a href="admin_add_emp.html">新增员工</a></li>
+            </ul>
+        </li>
+        <li class="dropdown myLi" >
+            <a href="./admin_reader_inf.html" class="dropdown-toggle"
+               data-toggle="dropdown">读者管理<span class="caret"></span></a>
+        </li>
+        <li class="dropdown myLi" >
+            <a href="admin_manager_inf.html" class="dropdown-toggle"
+               data-toggle="dropdown">管理员中心<span class="caret"></span></a>
+        </li>
+    </ul>
+</div>
+ <!--右侧-->
+<div class="SheetMain">
+    <a class="pos">当前位置：读者管理</a>
+    <div id="searchbar">
+          <p class="searchISBN">读者姓名：</p>
+            <input id="txtKey" type="text"placeholder="">
+          <input id="btnOK" type="button" value="查询" onclick="f_search()">
+    </div >
+
+    <div class="btnList">
+        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除选择的行</a>
+
+    </div>
+    <div id="maingrid4" style="margin:20px; padding:10px"></div>
+        </div>
+<!-- g data total ttt -->
+</body>
+</html>

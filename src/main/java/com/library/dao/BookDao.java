@@ -101,8 +101,7 @@ public class BookDao {
                         book.setEntrytime(resultSet.getDate("book_entrytime"));
                         book.setState(resultSet.getInt("book_status"));
                         book.setCollection(resultSet.getInt("book_collection"));
-                        System.out.println(book.getAuthor());
-//                        System.console(book.getAuthor());
+
                         books.add(book);
                     }
             }

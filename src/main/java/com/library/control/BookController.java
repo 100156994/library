@@ -30,6 +30,18 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @RequestMapping("/hello.html")
+    public ModelAndView hello(){
+
+        return new ModelAndView("hello");
+    }
+
+    @RequestMapping("/admin/index.html")
+    public ModelAndView adminBookInf(){
+
+        return new ModelAndView("admin_book_inf");
+    }
+
     @RequestMapping("/test.html")
     public ModelAndView test(){
         ArrayList<Book> books=bookService.getAllBooks();
@@ -55,7 +67,6 @@ public class BookController {
         JSONObject object = new JSONObject();
         List<Map<String,String>> list = new ArrayList<Map<String,String>>();
         ArrayList<Book> books=bookService.getAllBooks();
-       // String nvrsjson = JSONArray.toJSONString(books);
         object.put("Rows",books);
         object.put("Total",books.size());
         return object;
@@ -67,7 +78,6 @@ public class BookController {
         JSONObject object = new JSONObject();
         List<Map<String,String>> list = new ArrayList<Map<String,String>>();
         ArrayList<Book> books=bookService.getAllBooksInStorage();
-        // String nvrsjson = JSONArray.toJSONString(books);
         object.put("Rows",books);
         object.put("Total",books.size());
         return object;
@@ -79,12 +89,12 @@ public class BookController {
         JSONObject object = new JSONObject();
         List<Map<String,String>> list = new ArrayList<Map<String,String>>();
         ArrayList<Book> books=bookService.getAllBooksOutStorage();
-        // String nvrsjson = JSONArray.toJSONString(books);
         object.put("Rows",books);
         object.put("Total",books.size());
         return object;
     }
 
+    //暂时没有用到
     @ResponseBody
     @RequestMapping(value = "/editbook", method = RequestMethod.POST)
     public JSONObject editBook(@RequestBody Book book) {
@@ -101,14 +111,12 @@ public class BookController {
 
     @ResponseBody
     @RequestMapping(value = "/editbooks", method = RequestMethod.POST)
-    public JSONObject editBooks(@RequestBody List<Book> books) {
+    public JSONObject editBooks(@RequestBody ArrayList<Book> books) {
         JSONObject object = new JSONObject();
-        System.out.println(books.get(0));
         int[] succ = this.bookService.editBooks(books);
-        System.out.println(succ[0]);
-        //处理每一个book的更新情况 todo
-        //int[] succ={0};
-        if(1==1){
+
+        System.out.println(books.get(0).toString());
+        if(succ[0]==1){
             object.put("succ",succ);
             object.put("message","数据插入成功！");
         }else{
@@ -118,14 +126,13 @@ public class BookController {
         return object;
     }
 
+    //暂时没有用到
     @ResponseBody
     @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
     public JSONObject deleteBook(@RequestBody Book book) {
         JSONObject object = new JSONObject();
 
         int succ = this.bookService.deleteBook(book.getBookId());
-        //处理每一个book的更新情况 todo
-        System.out.println(succ);
         if(succ==1){
             object.put("succ",succ);
             object.put("message","数据删除成功！");
@@ -143,18 +150,25 @@ public class BookController {
     @RequestMapping(value = "/deletebooks", method = RequestMethod.POST)
     public JSONObject deleteBooks(@RequestBody List<Book> books) {
         JSONObject object = new JSONObject();
-        ArrayList<String> bookIds =new ArrayList<String>();
+        ArrayList<String> bookIds =new ArrayList<>();
         for(int i=0;i<books.size();i++){
             bookIds.add(books.get(i).getBookId());
         }
+        //每一个待删除的图书影响的数据库条目 1为成功
         int[] succ = this.bookService.deleteBook(bookIds);
-        //处理每一个book的更新情况 todo
-        if(succ[0]==1){
+        boolean flag=true;
+        for(int i=0;i<bookIds.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
             object.put("succ",succ);
-            object.put("message","数据删除成功！");
+            object.put("message","图书删除成功！");
         }else{
             object.put("succ",succ);
-            object.put("message","数据删除失败！");
+            object.put("message","图书删除失败！");
         }
         return object;
     }

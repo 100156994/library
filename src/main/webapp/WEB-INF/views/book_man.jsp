@@ -29,7 +29,7 @@
 <script src="/static/LigerUI/Source/lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
 <script src="/static/LigerUI/Source/lib/ligerUI/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
 <script src="/static/LigerUI/Source/lib/ligerUI/js/plugins/ligerSpinner.js" type="text/javascript"></script>
-    <script type="text/javascript">
+<script type="text/javascript">
 
     var grid = null;
     $(function () {
@@ -40,7 +40,7 @@
                 { display: '书名', name: 'name', minWidth: 60, editor: { type: 'text' } },
                 { display: '作者', name: 'author', width: 140,align:'left',editor: { type: 'text' } },
                 { display: '出版信息', name: 'publish',minWidth: 100,editor: { type: 'text' }},
-                { display: '出版日期', name: 'pubdate',width:80, minWidth: 50 ,editor: { type: 'date' }},
+                { display: '出版日期', name: 'pubdate',width:80, minWidth: 50 ,editor: { type: 'text' }},
                 { display: '价格', name: 'price',width:70, minWidth: 70 ,editor: { type: 'text' }},
                 { display: '类型', name: 'classnum', minWidth: 50 ,width:50,editor: { type: 'text' }}
             ],  pageSize:10,where : f_getWhere(),
@@ -101,26 +101,27 @@
     }
     function endEdit()
     {
+        grid.endEdit();
         var row = grid.getSelectedRows();
 
         var clone = function (obj) {
             return JSON.parse(JSON.stringify(obj));
         };
         var post =clone(row);
-        grid.endEdit();
+
         if (!row) { alert('请选择行'); return; }
 
-        for(var i=0;i<clone.length;i++){
-            delete clone[i].__id;
-            delete clone[i].__previd;
-            delete clone[i].__index;
-            delete clone[i].__status;
-            delete clone[i].__nextid;
-            delete clone[i]._editing;
+        for(var i=0;i<post.length;i++){
+            delete post[i].__id;
+            delete post[i].__previd;
+            delete post[i].__index;
+            delete post[i].__status;
+            delete post[i].__nextid;
+            delete post[i]._editing;
 
         }
 
-        alert(JSON.stringify(row));
+        alert(JSON.stringify(post));
         console.log(JSON.stringify(row));
         $.ajax({
             url: 'http://localhost:8080/editbooks',

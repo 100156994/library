@@ -14,6 +14,25 @@
     <!--<mvc:resources location="static/css/**" mapping="/css/**"></mvc:resources>-->
     <!--<mvc:resources location="static/js/**" mapping="/js/**"></mvc:resources>-->
     <!--<mvc:resources location="static/images/**" mapping="/images/**"></mvc:resources>-->
+    <mvc:resources mapping="/" location="/static/page/**"></mvc:resources>
+
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+
+        <property name="templateLoaderPath">
+        <value>/static/page/</value>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="defaultEncoding">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="htmlviewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".html"/>
+        <property name="order" value="0"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+    </bean>
+
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
@@ -22,6 +41,7 @@
         <property name="suffix">
             <value>.jsp</value>
         </property>
+        <property name="order" value="2"/>
     </bean>
     <bean
             class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
