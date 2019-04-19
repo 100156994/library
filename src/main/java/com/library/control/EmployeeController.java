@@ -65,18 +65,19 @@ public class EmployeeController {
         return object;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/addemp", method = RequestMethod.POST)
-    public  JSONObject addEmp(@RequestBody Employee emp){
-        JSONObject object = new JSONObject();
-        int succ =employeeService.deleteEmployee(emp.getEmp_id());
-        if(succ==1){
-            object.put("message","员工添加成功！");
-        }else{
-            object.put("message","员工删除失败！");
-        }
-        return object;
-    }
+    //待议
+//    @ResponseBody
+//    @RequestMapping(value = "/addemp", method = RequestMethod.POST)
+//    public  JSONObject addEmp(@RequestBody Employee emp){
+//        JSONObject object = new JSONObject();
+//        int succ =employeeService.(emp.getEmp_id());
+//        if(succ==1){
+//            object.put("message","员工添加成功！");
+//        }else{
+//            object.put("message","员工删除失败！");
+//        }
+//        return object;
+//    }
 
 
     @ResponseBody
