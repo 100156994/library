@@ -33,10 +33,10 @@
                 { display: '书名', name: 'name', minWidth: 60, editor: { type: 'text' } },
                 { display: '作者', name: 'author', width: 140,align:'left',editor: { type: 'text' } },
                 { display: '出版信息', name: 'publish',minWidth: 100,editor: { type: 'text' }},
-                { display: '出版日期', name: 'pubdate',width:50, minWidth: 80 ,editor: { type: 'text' }},
-                { display: '价格', name: 'price',width:70, minWidth: 70 ,editor: { type: 'text' }},
-                { display: '册数', name: 'classId', minWidth: 50 ,width:50,editor: { type: 'text' }},
-                { display: '状态', name: 'states', minWidth: 50 ,width:50,editor: { type: 'text' }}/*states*/
+                { display: '出版日期', name: 'pubdate',width:120, minWidth: 80 ,editor: { type: 'text' }},
+                { display: '价格', name: 'price',width:120, minWidth: 70 ,editor: { type: 'text' }},
+                { display: '册数', name: 'classId', minWidth: 50 ,width:80,editor: { type: 'text' }},
+                { display: '状态', name: 'states', minWidth: 50 ,width:80,editor: { type: 'text' }}/*states*/
             ],  pageSize:10,where : f_getWhere(),
             onSelectRow: function (rowdata, rowindex)
             {
@@ -47,7 +47,7 @@
             url:"http://localhost:8080/allbooks",
             enabledEdit: true, clickToEdit: false, isScroll: false,
             isChecked: f_isChecked, onCheckRow: f_onCheckRow, onCheckAllRow: f_onCheckAllRow,
-            width: '92%',height:'100%'
+            width: '75%',height:'100%'
         });
 
 
@@ -266,7 +266,7 @@
 <div class="SheetMain">
     <a class="pos">当前位置：图书管理 /采购管理</a>
     <div id="searchbar">
-          <p class="searchISBN">书籍名称：</p>
+          <p class="searchISBN">书名：</p>
         <input id="txtKey" type="text"placeholder="">
           <input id="btnOK" type="button" value="查询" onclick="f_search()">
     </div >
@@ -274,6 +274,6 @@
     <div class="btnList">
         <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除选择的行</a>
     </div>
-    <div id="maingrid4" style="margin:20px; padding:10px"></div>
+    <div id="maingrid4" ></div>
 </div>
 </body>

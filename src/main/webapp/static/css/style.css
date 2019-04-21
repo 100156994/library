@@ -1,6 +1,7 @@
 .pos{
 	font-size: 15px;
 	margin-left: 10px;
+	background-color: #5e5e5e;
 }
 #searchbar{
 	margin-top: 20px;
@@ -28,16 +29,18 @@
 	margin-left: 40px;
 	font-size: 15px;
 	border-radius: 5px;
-	background-color:#169bd5 ;
-	color: #FFFFFF;
+	//background-color:#169bd5 ;
+	background-color: #5e5e5e;
+	//color: #4cae4c;
 }
 #maingrid4{
 	float: left;
-	margin-top: 30px;
+	margin-top: 3px;
 }
 .btnList{
 	width: 100%;
-	float:right;
+	float:left;
+	background-color: #000000;
 }
 #maingrid5{
 	float: left;
@@ -49,6 +52,7 @@
 	margin-top: 5%;
 	margin-left: 30%;
 	font-size: 20px;
+	background-color: #0000FF;
 }
 .perinf{
 	margin: auto;

@@ -29,11 +29,11 @@
             columns: [
                 { display: '读者号', name: 'user_id', align: 'left', width: 140 },
                 { display: '姓名', name: 'name',width: 140,editor: { type: 'text' }},
-                { display: '余额', name: 'balance',width:100, minWidth: 70 ,editor: { type: 'text' }},
-                { display: '可借阅册数', name: 'borrow', width: 80, editor: { type: 'text' } },
-                { display: '已借阅册数', name: 'borrowed', width: 80, editor: { type: 'text' } },
-                { display: '可预约册数', name: 'order',width:80 ,editor: { type: 'text' }},
-                { display: '已预约册数', name: 'ordered',width:80,editor: { type: 'text' }}
+                { display: '余额', name: 'balance',width:120, minWidth: 70 ,editor: { type: 'text' }},
+                { display: '可借阅册数', name: 'borrow', width: 120, editor: { type: 'text' } },
+                { display: '已借阅册数', name: 'borrowed', width: 120, editor: { type: 'text' } },
+                { display: '可预约册数', name: 'order',width:120 ,editor: { type: 'text' }},
+                { display: '已预约册数', name: 'ordered',width:120,minWidth:80,editor: { type: 'text' }}
             ],  pageSize:10,where : f_getWhere(),
 
             onSelectRow: function (rowdata, rowindex)
@@ -45,7 +45,7 @@
             dataAction:"local",
             dataType: "json",
             url:"http://localhost:8080/allusers",
-            width: '80%',height:'100%'
+            width: '75%',height:'100%'
         });
 
 
@@ -207,10 +207,10 @@
     </div >
 
     <div class="btnList">
-        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除选择的行</a>
+        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除</a>
 
     </div>
-    <div id="maingrid4" style="margin:20px; padding:10px"></div>
+    <div id="maingrid4" ></div>
         </div>
 <!-- g data total ttt -->
 </body>

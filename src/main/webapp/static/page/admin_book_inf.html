@@ -32,9 +32,9 @@
                 { display: '书名', name: 'name', minWidth: 60, editor: { type: 'text' } },
                 { display: '作者', name: 'author', width: 140,align:'left',editor: { type: 'text' } },
                 { display: '出版信息', name: 'publish',minWidth: 100,editor: { type: 'text' }},
-                { display: '出版日期', name: 'pubdate',width:80, minWidth: 50 ,editor: { type: 'text' }},
-                { display: '价格', name: 'price',width:70, minWidth: 70 ,editor: { type: 'text' }},
-                { display: '类型', name: 'classId', minWidth: 50 ,width:50,editor: { type: 'text' }}
+                { display: '出版日期', name: 'pubdate',width:120, minWidth: 80 ,editor: { type: 'text' }},
+                { display: '价格', name: 'price',width:120, minWidth: 70 ,editor: { type: 'text' }},
+                { display: '类型', name: 'status', minWidth: 50 ,width:80,editor: { type: 'text' }}
             ],  pageSize:10,where : f_getWhere(),
 
             onSelectRow: function (rowdata, rowindex)
@@ -46,7 +46,7 @@
             url:"http://localhost:8080/allbooks",
             enabledEdit: true, clickToEdit: false, isScroll: false,
             isChecked: f_isChecked, onCheckRow: f_onCheckRow, onCheckAllRow: f_onCheckAllRow,
-            width: '92%',height:'100%'
+            width: '75%',height:'100%'
         });
 
 
@@ -229,24 +229,25 @@
 </div>
 <!-- 导航 -->
 <div class="myNav"style="position:  relative;z-index: 1">
+
     <ul class="nav nav-pills nav-justified">
         <li class="dropdown myLi" >
-            <a href="" class="dropdown-toggle"
+            <a href="javascript:void(0)" class="dropdown-toggle"
                data-toggle="dropdown">图书管理<span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="./admin_book_inf.html">信息管理</a></li>
                 <li class="divider"></li>
-                <li><a href="admin_in.html">入库管理</a></li>
+                <li><a href="./admin_in.html">入库管理</a></li>
                 <li class="divider"></li>
-                <li><a href="admin_out.html">出库管理</a></li>
+                <li><a href="./admin_out.html">出库管理</a></li>
                 <li class="divider"></li>
                 <li class="divider"></li>
-                <li><a href="admin_buy.html">采购管理</a></li>
+                <li><a href="./admin_buy.html">采购管理</a></li>
 
             </ul>
         </li>
         <li class="dropdown myLi" >
-            <a href="" class="dropdown-toggle"
+            <a href="javascript:void(0)" class="dropdown-toggle"
                data-toggle="dropdown">员工管理<span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="admin_emp_inf.html">信息管理</a></li>
@@ -266,21 +267,21 @@
 </div>
  <!--右侧-->
 <div class="SheetMain">
-    <a class="pos">当前位置：图书管理 / 信息管理</a>
+    <a class="pos">当前位置 / 信息管理</a>
     <div id="searchbar">
-          <p class="searchISBN">图书名：</p>
+          <p class="searchISBN">书名：</p>
             <input id="txtKey" type="text"placeholder="">
           <input id="btnOK" type="button" value="查询" onclick="f_search()">
     </div >
 
     <div class="btnList">
         <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="beginEdit()">修改行</a>
-        <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="endEdit()">提交修改</a>
+        <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="endEdit()">提交</a>
         <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="cancelEdit()">取消</a>
         <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="cancelAllEdit()">取消全部</a>
-        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除选择的行</a>
+        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除</a>
     </div>
-    <div id="maingrid4" style="margin:20px; padding:10px"></div>
+    <div id="maingrid4" ></div>
         </div>
 <!-- g data total ttt -->
 </body>

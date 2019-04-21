@@ -25,19 +25,19 @@
 
     var grid = null;
     $(function () {
-        window['g'] =grid =  $("#maingrid5").ligerGrid({
+        window['g'] =grid =  $("#maingrid4").ligerGrid({
             checkbox: true,
             columns: [
                 { display: '员工号', name: 'emp_id', align: 'left', width: 140,editor: { type: 'text' } },
                 { display: '姓名', name: 'emp_name',minWidth: 100,editor: { type: 'text' }},
-                { display: '电话', name: 'emp_phone',width:80, minWidth: 50 ,editor: { type: 'text' }},
-                { display: '邮箱', name: 'emp_email',width:70, minWidth: 70 ,editor: { type: 'text' }}
+                { display: '电话', name: 'emp_phone',width:120, minWidth: 80 ,editor: { type: 'text' }},
+                { display: '邮箱', name: 'emp_email',width:120, minWidth: 80 ,editor: { type: 'text' }}
             ],  pageSize:10,
             dataAction:"local",
             dataType: "json",
             url:"http://localhost:8080/allbook2435s",
             enabledEdit: true, clickToEdit: false, isScroll: false,
-            width: '50%',height:'100%'
+            width: '75%',height:'100%'
         });
 
 
@@ -208,13 +208,13 @@
 </div>
  <!--右侧-->
 <div class="SheetMain">
-    <a class="pos">当前位置：员工管理 / 信息管理</a>
-    <div class="btnList">
+    <a class="pos">当前位置：员工管理 / 新增员工</a>
+    <div class="btnList2">
         <a class="l-button" style="width:100px;float:left; margin-left:6px;" onclick="addNewRow()">添加行</a>
-        <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="endEdit()">提交修改</a>
-        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除选择的行</a>
+        <a class="l-button" style="width:80px;float:left; margin-left:6px;" onclick="endEdit()">提交</a>
+        <a class="l-button" style="width:120px;float:left; margin-left:6px;" onclick="deleteRow()">删除</a>
     </div>
-    <div id="maingrid5" style="margin:20px; padding:10px"></div>
+    <div id="maingrid4" ></div>
         </div>
 <!-- g data total ttt -->
 </body>
