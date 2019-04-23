@@ -111,7 +111,7 @@
 
         }
 
-        alert(JSON.stringify(post));
+        //alert(JSON.stringify(post));
         console.log(JSON.stringify(row));
         $.ajax({
             url: 'http://localhost:8080/editbooks',
@@ -121,7 +121,10 @@
             dataType: "json",
             success: function (result) {
 
-                alert(result.message);
+                if(result.message)  
+                    alert("提交成功！");
+                else
+                    alert("提交失败！");
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -159,7 +162,10 @@
             dataType: "json",
             success: function (result) {
                 grid.deleteSelectedRow();
-                alert(result.message);
+                if(result.message)  
+                    alert("删除成功！");
+                else
+                    alert("删除失败！");
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -178,12 +184,12 @@
     {
         var row = grid.getSelectedRow();
         if (!row) { alert('请选择行'); return; }
-        alert(JSON.stringify(row));
+        //alert(JSON.stringify(row));
     }
     function getData()
     {
         var data = grid.getData();
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
     }
     var checkedCustomer = [];
     function findCheckedCustomer(bookId)
