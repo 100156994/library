@@ -89,7 +89,7 @@
 
         }
 
-        alert(JSON.stringify(post));
+        //alert(JSON.stringify(post));
         console.log(JSON.stringify(row));
         $.ajax({
             url: 'http://localhost:8080/addemps',
@@ -98,11 +98,13 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (result) {
-                if(result.message)
-                    alert("员工添加成功");
+
+
+                if(result.message==1)  
+                    alert("添加成功！");
                 else
-                    alert("员工添加失败" );
-                // alert(result.message);
+                    alert("添加失败！");
+
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -140,7 +142,10 @@
             dataType: "json",
             success: function (result) {
                 grid.deleteSelectedRow();
-                alert(result.message);
+                if(result.message==1)  
+                    alert("删除成功！");
+                else
+                    alert("删除失败！");
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -159,12 +164,12 @@
     {
         var row = grid.getSelectedRow();
         if (!row) { alert('请选择行'); return; }
-        alert(JSON.stringify(row));
+        //alert(JSON.stringify(row));
     }
     function getData()
     {
         var data = grid.getData();
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
     }
 
 </script>
