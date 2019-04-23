@@ -100,7 +100,7 @@
             success: function (result) {
 
 
-                if(result.message==1)  
+                if(result.message)  
                     alert("添加成功！");
                 else
                     alert("添加失败！");
@@ -142,7 +142,7 @@
             dataType: "json",
             success: function (result) {
                 grid.deleteSelectedRow();
-                if(result.message==1)  
+                if(result.message)  
                     alert("删除成功！");
                 else
                     alert("删除失败！");
