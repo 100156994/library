@@ -41,7 +41,36 @@ public class PurchaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/deletepurs", method = RequestMethod.POST)
+    public JSONObject deleteUsers(@RequestBody List<Purchase> purs) {
+        JSONObject object = new JSONObject();
+        ArrayList<String> purIds =new ArrayList<>();
+        for(int i=0;i<purs.size();i++){
+            purIds.add(purs.get(i).getPurId());
+        }
+        //每一个待删除的图书影响的数据库条目 1为成功
+        int[] succ = this.purchaseService.deletePurchase(purIds);
+        boolean flag=true;
+        for(int i=0;i<purIds.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
+            object.put("succ",succ);
+            object.put("message",1);
+        }else{
+            object.put("succ",succ);
+            object.put("message",0);
+        }
+        return object;
+    }
 
+
+
+    //测试
+    @ResponseBody
     @RequestMapping(value = "/test1", method = RequestMethod.POST)
     public JSONObject insert(@RequestBody Purchase purchase) {
         JSONObject object = new JSONObject();

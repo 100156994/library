@@ -23,9 +23,10 @@ public class PurchaseDao {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    private final static String ADD_PURCHASE_SQL="INSERT INTO purchase VALUES(?,?,?,?,?,?,?)";
+    private final static String ADD_PURCHASE_SQL="INSERT INTO purchase VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private final static String DELETE_PURCHASE_SQL="delete from purchase where pur_id = ?  ";
-    private final static String EDIT_PURCHASE_SQL="update purchase set isbn=?,num=?,unitprice=?,time=?,buyer=?,status=? where pur_id= ? ";
+    private final static String EDIT_PURCHASE_SQL="update purchase set isbn=?,pur_bookname =?,pur_bookauthor=?,pur_bookpublicdate=?," +
+            "pur_bookpublisher=?num=?,unitprice=?,time=?,buyer=?,status=? where pur_id= ? ";
     private final static String QUERY_ALL_PURCHASES_SQL="SELECT * FROM purchase ";
     private final static String QUERY_PURCHASE_SQL="SELECT * FROM purchase WHERE pur_id like  ?  or isbn like ?";
     private final static String MATCH_PURCHASE_SQL="SELECT count(*) FROM purchase WHERE pur_id like ?  or isbn like ?  ";
@@ -53,6 +54,10 @@ public class PurchaseDao {
                     purchase.setUnitprice(resultSet.getFloat("pur_unitprice"));
                     purchase.setTime(resultSet.getDate("pur_time"));
                     purchase.setStatus(resultSet.getInt("status"));
+                    purchase.setBook_author(resultSet.getString("pur_bookauthor"));
+                    purchase.setBookpublicdate(resultSet.getDate("pur_bookpublicdate"));
+                    purchase.setBook_name(resultSet.getString("pur_bookname"));
+                    purchase.setBookpublisher(resultSet.getString("pur_bookpublisher"));
 
                     purchases.add(purchase);
                 }
@@ -77,7 +82,10 @@ public class PurchaseDao {
                     purchase.setUnitprice(resultSet.getFloat("pur_unitprice"));
                     purchase.setTime(resultSet.getDate("pur_time"));
                     purchase.setStatus(resultSet.getInt("status"));
-
+                    purchase.setBook_author(resultSet.getString("pur_bookauthor"));
+                    purchase.setBookpublicdate(resultSet.getDate("pur_bookpublicdate"));
+                    purchase.setBook_name(resultSet.getString("pur_bookname"));
+                    purchase.setBookpublisher(resultSet.getString("pur_bookpublisher"));
                     purchases.add(purchase);
                 }
             }
@@ -114,10 +122,12 @@ public class PurchaseDao {
         Date time=purchase.getTime();
         String buyer=purchase.getBuyer();
         int status = purchase.getStatus();
+        String book_author =purchase.getBook_author();
+        String book_pub =purchase.getBookpublisher();
+        String book_name =purchase.getBook_name();
+        java.sql.Date  date =new java.sql.Date(purchase.getBookpublicdate().getTime());
 
-
-
-        return jdbcTemplate.update(ADD_PURCHASE_SQL,new Object[]{purId,isbn,num,unitprice,time,buyer,status});
+        return jdbcTemplate.update(ADD_PURCHASE_SQL,new Object[]{purId,isbn,book_name,book_author,date,book_pub,num,unitprice,time,buyer,status});
     }
 
     public Purchase getPurchase(String purchaseId){
@@ -131,6 +141,10 @@ public class PurchaseDao {
                 purchase.setUnitprice(resultSet.getFloat("pur_unitprice"));
                 purchase.setTime(resultSet.getDate("pur_time"));
                 purchase.setStatus(resultSet.getInt("status"));
+                purchase.setBook_author(resultSet.getString("pur_bookauthor"));
+                purchase.setBookpublicdate(resultSet.getDate("pur_bookpublicdate"));
+                purchase.setBook_name(resultSet.getString("pur_bookname"));
+                purchase.setBookpublisher(resultSet.getString("pur_bookpublisher"));
 
             }
 
@@ -145,8 +159,11 @@ public class PurchaseDao {
         Date time=purchase.getTime();
         String buyer=purchase.getBuyer();
         int status = purchase.getStatus();
-
-        return jdbcTemplate.update(EDIT_PURCHASE_SQL,new Object[]{isbn,num,unitprice,time,buyer,status,purId});
+        String book_author =purchase.getBook_author();
+        String book_pub =purchase.getBookpublisher();
+        String book_name =purchase.getBook_name();
+        java.sql.Date  date =new java.sql.Date(purchase.getBookpublicdate().getTime());
+        return jdbcTemplate.update(EDIT_PURCHASE_SQL,new Object[]{purId,isbn,book_name,book_author,date,book_pub,num,unitprice,time,buyer,status});
     }
 
 }

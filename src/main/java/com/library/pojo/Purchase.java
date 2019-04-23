@@ -8,6 +8,10 @@ import java.util.Date;
 public class Purchase implements Serializable{
     private String purId;
     private String isbn;
+    private String book_name;
+    private String book_author;
+    private String bookpublisher;
+    private Date bookpublicdate;
     private int num;
     private float unitprice;
     private Date time;
@@ -28,6 +32,38 @@ public class Purchase implements Serializable{
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getBook_name() {
+        return book_name;
+    }
+
+    public void setBook_name(String book_name) {
+        this.book_name = book_name;
+    }
+
+    public String getBook_author() {
+        return book_author;
+    }
+
+    public void setBook_author(String book_author) {
+        this.book_author = book_author;
+    }
+
+    public String getBookpublisher() {
+        return bookpublisher;
+    }
+
+    public void setBookpublisher(String bookpublisher) {
+        this.bookpublisher = bookpublisher;
+    }
+
+    public Date getBookpublicdate() {
+        return bookpublicdate;
+    }
+
+    public void setBookpublicdate(Date bookpublicdate) {
+        this.bookpublicdate = bookpublicdate;
     }
 
     public int getNum() {
@@ -53,17 +89,6 @@ public class Purchase implements Serializable{
     public void setTime(Date time) {
         this.time = time;
     }
-
-//    public void setTime(String time) {
-//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        try{
-//            Date date=sdf.parse(time);
-//            this.time=date;
-//        }catch (ParseException e){
-//            e.printStackTrace();
-//        }
-//    }
 
     public String getBuyer() {
         return buyer;

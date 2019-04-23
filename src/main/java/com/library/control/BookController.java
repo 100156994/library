@@ -115,13 +115,20 @@ public class BookController {
         JSONObject object = new JSONObject();
         int[] succ = this.bookService.editBooks(books);
 
-        System.out.println(books.get(0).toString());
-        if(succ[0]==1){
+        //System.out.println(books.get(0).toString());
+        boolean flag=true;
+        for(int i=0;i<books.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
             object.put("succ",succ);
-            object.put("message","数据插入成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","数据插入失败！");
+            object.put("message",0);
         }
         return object;
     }
@@ -135,10 +142,10 @@ public class BookController {
         int succ = this.bookService.deleteBook(book.getBookId());
         if(succ==1){
             object.put("succ",succ);
-            object.put("message","数据删除成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","数据删除失败！");
+            object.put("message",0);
         }
         return object;
     }
@@ -165,10 +172,10 @@ public class BookController {
         }
         if(flag){
             object.put("succ",succ);
-            object.put("message","图书删除成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","图书删除失败！");
+            object.put("message",0);
         }
         return object;
     }

@@ -55,10 +55,10 @@ public class UserController {
         }
         if(flag){
             object.put("succ",succ);
-            object.put("message","读者删除成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","读者删除失败！");
+            object.put("message",0);
         }
         return object;
     }

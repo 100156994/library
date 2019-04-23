@@ -71,7 +71,14 @@ public class EmployeeController {
     public  JSONObject addEmps(@RequestBody JSONArray json){
         JSONObject object = new JSONObject();
         int[] succ =employeeService.addEmployee(json);
-        if(succ[0]==1){
+        boolean flag=true;
+        for(int i=0;i<json.size();i++){
+            if(succ[i]!=1){
+                flag=false;
+                break;
+            }
+        }
+        if(flag){
             object.put("succ",succ);
             object.put("message",1);
         }else{
@@ -96,10 +103,10 @@ public class EmployeeController {
         }
         if(flag){
             object.put("succ",succ);
-            object.put("message","员工删除成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","员工删除失败！");
+            object.put("message",0);
         }
         return object;
     }
