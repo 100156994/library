@@ -1,7 +1,6 @@
 .pos{
 	font-size: 15px;
-	margin-left: 10px;
-	background-color: #5e5e5e;
+	margin-left: 5%;
 }
 #searchbar{
 	margin-top: 20px;
@@ -29,18 +28,19 @@
 	margin-left: 40px;
 	font-size: 15px;
 	border-radius: 5px;
-	//background-color:#169bd5 ;
-	background-color: #5e5e5e;
-	//color: #4cae4c;
+	background-color:#169bd5 ;
+	color: #FFFFFF;
 }
 #maingrid4{
 	float: left;
-	margin-top: 3px;
+	margin-top: 30px;
+	margin-left: 10%;
 }
-.btnList{
+.btnList {
 	width: 100%;
-	float:left;
-	background-color: #000000;
+	float: left;
+	margin-left: 10%;
+	margin-top: 1%;
 }
 #maingrid5{
 	float: left;
@@ -49,11 +49,60 @@
 }
 .personal{
 	float:left;
+	width: 300px;
 	margin-top: 5%;
-	margin-left: 30%;
+	margin-left: 40%;
 	font-size: 20px;
-	background-color: #0000FF;
 }
-.perinf{
-	margin: auto;
+
+.SheetMain{
+	float: left;
+	width:100%;
+	margin-top: 1.5%;
+
+}
+.btnList2{
+	width: 100%;
+	float: left;
+	margin-left: 10%;
+	margin-top: 3%;
+}
+.showper{
+	width: 100%;
+	height: 50px;
+	float: left;
+}
+.showinf{
+	float: left;
+	height: auto;
+	margin-left: 20px;
+	margin-top: auto;
+	font-size: 15px;
+}
+.perint{
+	width: 80px;
+	float: left;
+	margin-top: auto;
+}
+#btRe{
+	width: 120px;
+	height: 32px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 4%;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color:#0033ff ;
+	color: #FFFFFF;
+}
+#submit{
+	width: 120px;
+	height: 32px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 28%;
+	font-size: 15px;
+	border-radius: 5px;
+	background-color:#0033ff ;
+	color: #FFFFFF;
 }

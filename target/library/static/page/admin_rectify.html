@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>图书管理员系统</title>
 </head>
 <body>
 <title></title>
-<script>
-function jump(){
-window.location.href="";
-}
-</script>
 <link rel="stylesheet"  href="/static/css/menu-css.css">
 <link rel="stylesheet"  href="/static/css/style.css">
 <!-- 标题 -->
 <div class="myTitle">
     <img src="/static/images/title.png">
+</div>
 </div>
 <!-- 导航 -->
 <div class="myNav"style="position:  relative;z-index: 1">
@@ -64,11 +60,15 @@ window.location.href="";
     </div>
     <div class="showper">
         <p class="perint">账户名：</p>
-        <p class="showinf">1234</p>
+        <input class="showinf" name="name" >
     </div>
-    <a class="sub" href="admin_rectify.html">
-        <button id="btRe">修改</button>
-    </a>
+    <div class="showper">
+        <p class="perint">密码：</p>
+        <input class="showinf" name="password">
+    </div>
+    <div class="sub">
+        <input id="submit" type="button" value="确认" onclick="submitinf()">
+    </div>
 </div>
 </body>
 </html>

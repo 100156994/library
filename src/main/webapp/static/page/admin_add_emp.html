@@ -98,8 +98,11 @@
             contentType: 'application/json',
             dataType: "json",
             success: function (result) {
-
-                alert(result.message);
+                if(result.message)
+                    alert("员工添加成功");
+                else
+                    alert("员工添加失败" );
+                // alert(result.message);
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },

@@ -73,10 +73,10 @@ public class EmployeeController {
         int[] succ =employeeService.addEmployee(json);
         if(succ[0]==1){
             object.put("succ",succ);
-            object.put("message","员工添加成功！");
+            object.put("message",1);
         }else{
             object.put("succ",succ);
-            object.put("message","员工删除失败！");
+            object.put("message",0);
         }
         return object;
     }
