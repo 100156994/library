@@ -13,7 +13,7 @@ public class PurchaseService {
     private PurchaseDao purchaseDao;
 
     @Autowired
-    public void setpurchaseDao(PurchaseDao purchaseDao) {
+    public void setPurchaseDao(PurchaseDao purchaseDao) {
         this.purchaseDao = purchaseDao;
     }
 

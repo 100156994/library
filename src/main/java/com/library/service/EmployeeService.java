@@ -19,7 +19,7 @@ public class EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
-    public void setUserDao(EmployeeDao employeeDao) {
+    public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
