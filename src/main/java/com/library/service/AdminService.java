@@ -22,4 +22,7 @@ public class AdminService {
         return adminDao.getAdmin();
     }
 
+    public  int change(Admin admin){
+        return adminDao.update(admin);
+    }
 }

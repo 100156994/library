@@ -38,4 +38,19 @@ public class AdminController {
         object.put("username",admin.getName());
         return object;
     }
+
+    @RequestMapping("/admin_rectify")
+    public JSONObject change(@RequestBody JSONObject jsonObject){
+        JSONObject object =new JSONObject();
+        Admin admin =new Admin();
+        admin.setPassword(jsonObject.getString("password"));
+        admin.setName(jsonObject.getString("username"));
+        int succ =adminService.change(admin);
+        if(succ==1){
+            object.put("message",1);
+        }else {
+            object.put("message",0);
+        }
+        return object;
+    }
 }

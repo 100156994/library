@@ -26,6 +26,7 @@ public class AdminDao {
     }
 
     private final static String ADMIN_SQL ="select * from admin";
+    private final static String UPDATE_SQL="update admin set admin_name=?,admin_password=? where admin_id =0001";
 
     public Admin getAdmin(){
         final Admin admin =new Admin();
@@ -42,5 +43,10 @@ public class AdminDao {
 
         });
         return admin;
+    }
+
+    public int update(Admin admin){
+
+        return jdbcTemplate.update(UPDATE_SQL,new Object[]{admin.getName(),admin.getPassword()});
     }
 }
