@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>图书管理员系统</title>
+    <script src="/static/LigerUI/Source/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
 </head>
 <body>
 <title></title>
@@ -10,6 +11,26 @@
 function jump(){
 window.location.href="";
 }
+
+var id ;
+var name;
+$.ajax({
+    url: 'http://localhost:8080/getAdmin',
+    type: 'POST',
+    data: JSON.stringify(id),
+    contentType: 'application/json',
+    dataType: "json",
+    success: function (result) {
+        id=result.id;
+        name=result.username;
+        $("#a_id").text(id);
+        $("#a_name").text(name)
+    },
+    error: function (err) {
+        alert("error");
+    }
+});
+
 </script>
 <link rel="stylesheet"  href="/static/css/menu-css.css">
 <link rel="stylesheet"  href="/static/css/style.css">
@@ -60,11 +81,11 @@ window.location.href="";
 <div class="personal">
     <div class="showper">
         <p class="perint">ID：</p>
-        <p class="showinf">1234</p>
+        <p class="showinf" id="a_id">1234</p>
     </div>
     <div class="showper">
         <p class="perint">账户名：</p>
-        <p class="showinf">1234</p>
+        <p class="showinf" id="a_name">amdin</p>
     </div>
     <a class="sub" href="admin_rectify.html">
         <button id="btRe">修改</button>

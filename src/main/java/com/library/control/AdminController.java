@@ -40,7 +40,9 @@ public class AdminController {
     }
 
     @RequestMapping("/admin_rectify")
+    @ResponseBody
     public JSONObject change(@RequestBody JSONObject jsonObject){
+        System.out.println(jsonObject);
         JSONObject object =new JSONObject();
         Admin admin =new Admin();
         admin.setPassword(jsonObject.getString("password"));

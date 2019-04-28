@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>图书管理员系统</title>
+    <script src="/static/LigerUI/Source/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
 </head>
 <body>
+<script>
+    var id ;
+    $.ajax({
+        url: 'http://localhost:8080/getAdmin',
+        type: 'POST',
+        data: JSON.stringify(id),
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (result) {
+            id=result.id;
+            $("#a_id").text(id);
+        },
+        error: function (err) {
+            alert("error");
+        }
+    });
+    function submitinf(){
+        var man_name=document.getElementById("username").value;
+        var man_password=document.getElementById("password").value;
+        var post=new Object();
+        post.username=man_name;
+        post.password=man_password;
+        //alert(post);
+        $.ajax({
+            url: 'http://localhost:8080/admin_rectify',
+            type: 'POST',
+            data: JSON.stringify(post),
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (result) {
+                if(result.message)
+                    alert("修改成功");
+                else
+                    alert("修改失败");
+            },
+            error: function (err) {
+                alert("error");
+                location.reload();
+            }
+        });
+    }
+
+</script>
 <title></title>
 <link rel="stylesheet"  href="/static/css/menu-css.css">
 <link rel="stylesheet"  href="/static/css/style.css">
@@ -56,15 +100,15 @@
 <div class="personal">
     <div class="showper">
         <p class="perint">ID：</p>
-        <p class="showinf">1234</p>
+        <p class="showinf" id="a_id"></p>
     </div>
     <div class="showper">
         <p class="perint">账户名：</p>
-        <input class="showinf" name="name" >
+        <input class="showinf" name="name" id ="username">
     </div>
     <div class="showper">
         <p class="perint">密码：</p>
-        <input class="showinf" name="password">
+        <input class="showinf" name="password" type="password" id="password">
     </div>
     <div class="sub">
         <input id="submit" type="button" value="确认" onclick="submitinf()">

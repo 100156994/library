@@ -33,10 +33,10 @@
                 { display: '书名', name: 'book_name', minWidth: 60, editor: { type: 'text' } },
                 { display: '作者', name: 'book_author', width: 140,align:'left',editor: { type: 'text' } },
                 { display: '出版信息', name: 'bookpublisher',minWidth: 100,editor: { type: 'text' }},
-                { display: '出版日期', name: 'bookpublicpubdate',width:120, minWidth: 80 ,editor: { type: 'text' }},
+                { display: '出版日期', name: 'bookpublicdate',width:120, minWidth: 80 ,editor: { type: 'text' }},
                 { display: '单本价格', name: 'unitprice',width:120, minWidth: 70 ,editor: { type: 'text' }},
                 { display: '册数', name: 'num', minWidth: 50 ,width:80,editor: { type: 'text' }},
-                { display: '购买人员', name: 'buyer', minWidth: 50 ,width:80,editor: { type: 'text' }}
+                { display: '购买人员', name: 'buyer', minWidth: 50 ,width:80,editor: { type: 'text' }},
                 { display: '购买时间', name: 'time', minWidth: 50 ,width:80,editor: { type: 'text' }}/*states*/
             ],  pageSize:10,where : f_getWhere(),
             onSelectRow: function (rowdata, rowindex)
@@ -45,7 +45,7 @@
             },
             dataAction:"local",
             dataType: "json",
-            url:"http://localhost:8080/allbooks",
+            url:"http://localhost:8080/allpurs",
             enabledEdit: true, clickToEdit: false, isScroll: false,
             isChecked: f_isChecked, onCheckRow: f_onCheckRow, onCheckAllRow: f_onCheckAllRow,
             width: '75%',height:'100%'
@@ -152,7 +152,7 @@
             delete post[i]._editing;
         }
         $.ajax({
-            url: 'http://localhost:8080/deletebooks',
+            url: 'http://localhost:8080/deletepurs',
             type: 'POST',
             data: JSON.stringify(post),
             contentType: 'application/json',

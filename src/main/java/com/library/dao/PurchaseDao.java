@@ -81,7 +81,7 @@ public class PurchaseDao {
                     purchase.setNum(resultSet.getInt("pur_num"));
                     purchase.setUnitprice(resultSet.getFloat("pur_unitprice"));
                     purchase.setTime(resultSet.getDate("pur_time"));
-                    purchase.setStatus(resultSet.getInt("status"));
+                    purchase.setStatus(resultSet.getInt("pur_status"));
                     purchase.setBook_author(resultSet.getString("pur_bookauthor"));
                     purchase.setBookpublicdate(resultSet.getDate("pur_bookpublicdate"));
                     purchase.setBook_name(resultSet.getString("pur_bookname"));

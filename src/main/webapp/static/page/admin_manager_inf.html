@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>图书管理员系统</title>
+    <script src="/static/LigerUI/Source/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
 </head>
 <body>
 <title></title>
@@ -16,18 +17,17 @@ var name;
 $.ajax({
     url: 'http://localhost:8080/getAdmin',
     type: 'POST',
-    data: JSON.stringify(post),
+    data: JSON.stringify(id),
     contentType: 'application/json',
     dataType: "json",
     success: function (result) {
         id=result.id;
-        name=result.name;
+        name=result.username;
         $("#a_id").text(id);
         $("#a_name").text(name)
     },
     error: function (err) {
         alert("error");
-        location.reload();
     }
 });
 

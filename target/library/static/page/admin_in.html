@@ -35,7 +35,7 @@
                 { display: '出版信息', name: 'publish',minWidth: 100,editor: { type: 'text' }},
                 { display: '出版日期', name: 'pubdate',width:120, minWidth: 80 ,editor: { type: 'text' }},
                 { display: '价格', name: 'price',width:120, minWidth: 70 ,editor: { type: 'text' }},
-                { display: '册数', name: 'classId', minWidth: 50 ,width:80,editor: { type: 'text' }}
+                { display: '册数', name: 'collection', minWidth: 50 ,width:80,editor: { type: 'text' }}
             ],  pageSize:10,where : f_getWhere(),
             onSelectRow: function (rowdata, rowindex)
             {
@@ -112,7 +112,7 @@
 
         }
 
-        alert(JSON.stringify(post));
+        //alert(JSON.stringify(post));
         console.log(JSON.stringify(row));
         $.ajax({
             url: 'http://localhost:8080/editbooks',
@@ -122,7 +122,10 @@
             dataType: "json",
             success: function (result) {
 
-                alert(result.message);
+                if(result.message)  
+                    alert("提交成功！");
+                else
+                    alert("提交失败！");
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -160,7 +163,10 @@
             dataType: "json",
             success: function (result) {
                 grid.deleteSelectedRow();
-                alert(result.message);
+                if(result.message)  
+                    alert("删除成功！");
+                else
+                    alert("删除失败！");
                 //$("#myModal").modal("hide");
                 //oTable.fnDraw();
             },
@@ -180,12 +186,12 @@
     {
         var row = grid.getSelectedRow();
         if (!row) { alert('请选择行'); return; }
-        alert(JSON.stringify(row));
+        //alert(JSON.stringify(row));
     }
     function getData()
     {
         var data = grid.getData();
-        alert(JSON.stringify(data));
+        //alert(JSON.stringify(data));
     }
     var checkedCustomer = [];
     function findCheckedCustomer(ISBN)
