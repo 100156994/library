@@ -34,7 +34,7 @@ public class AdminController {
     public JSONObject getAdmin(){
         JSONObject object = new JSONObject();
         Admin admin = adminService.getAdmin();
-        object.put("password",admin.getPassword());
+        object.put("id",admin.getAdmin_id());
         object.put("username",admin.getName());
         return object;
     }
